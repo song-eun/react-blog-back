@@ -1,4 +1,4 @@
-import { userModel } from "../models/User";
+import { User } from "../models/User.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { secretKey, tokenLife, cookieOptions } from "../config/jwt.js";
@@ -9,12 +9,12 @@ export const register = async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    const existingUser = await userModel.findOne({ username });
+    const existingUser = await User.findOne({ username });
     if (existingUser) {
       return res.status(409).json({ error: "이미 존재하는 아이디입니다." });
     }
 
-    const userDoc = new userModel({
+    const userDoc = new User({
       username,
       password: bcrypt.hashSync(password, saltRounds),
     });
@@ -35,7 +35,7 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const { username, password } = req.body;
-    const userDoc = await userModel.findOne({ username });
+    const userDoc = await User.findOne({ username });
     if (!userDoc) {
       return res.status(401).json({ error: "없는 사용자입니다." });
     }

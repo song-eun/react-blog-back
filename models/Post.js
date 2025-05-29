@@ -32,4 +32,4 @@ const postSchema = new Schema(
   { timestamps: true }
 );
 
-export const postModel = model("Post", postSchema);
+export const Post = model("Post", postSchema);

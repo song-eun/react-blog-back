@@ -1,4 +1,7 @@
-export const secretKey = process.env.JWT_SCR_KEY;
+import dotenv from "dotenv";
+dotenv.config();
+
+export const secretKey = process.env.JWT_SECRET;
 export const tokenLife = process.env.JWT_EXP;
 
 export const cookieOptions = {

@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URI, {
@@ -5,7 +7,7 @@ const connectDB = async () => {
     });
     console.log("MongoDB 연결됨");
   } catch (error) {
-    console.log("MongoDB 연결 안됨", err);
+    console.log("MongoDB 연결 안됨", error);
     process.exit(1); // Node.js 프로세스를 즉시 종료
   }
 };
